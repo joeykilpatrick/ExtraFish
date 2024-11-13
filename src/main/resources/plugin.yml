@@ -1,0 +1,4 @@
+name: ExtraFish
+version: 0.0.1
+main: cloud.kilpatrick.minecraft.ExtraFishPlugin
+api-version: 1.16
