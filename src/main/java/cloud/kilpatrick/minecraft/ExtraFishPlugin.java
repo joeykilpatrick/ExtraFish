@@ -63,7 +63,9 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
                     if (meta != null) {
 
                         meta.setDisplayName(fish.getClass().getSimpleName());
+                        meta.setCustomModelData(fish.getMetadataNum());
                         pluginFish.setItemMeta(meta);
+
                     }
 
                     // Replace the caught item with the sturgeon
