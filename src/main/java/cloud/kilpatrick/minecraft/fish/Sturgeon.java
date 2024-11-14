@@ -2,10 +2,11 @@ package cloud.kilpatrick.minecraft.fish;
 
 public class Sturgeon extends Fish {
 
-    private final static double rarity = 0.3;
+    private final static int customModelData = 1001;
+    private final static double rarity = 0.2;
 
     public Sturgeon() {
-        super(5, rarity);
+        super(customModelData, rarity);
     }
 
 }

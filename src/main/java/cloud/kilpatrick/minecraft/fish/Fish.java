@@ -1,21 +1,40 @@
 package cloud.kilpatrick.minecraft.fish;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.FoodComponent;
+
 public abstract class Fish {
 
-    int metadataNum;
     double rarity;
+    ItemStack itemStack;
 
-    protected Fish(int metadataNum, double rarity) {
-        this.metadataNum = metadataNum;
+    protected Fish(int customModelData, double rarity) {
         this.rarity = rarity;
-    }
 
-    public int getMetadataNum() {
-        return metadataNum;
+        this.itemStack = new ItemStack(Material.SALMON); // Use salmon as the base item
+        ItemMeta meta = this.itemStack.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(this.getClass().getSimpleName());
+        meta.setCustomModelData(customModelData);
+        this.itemStack.setItemMeta(meta);
     }
 
     public double getRarity() {
         return rarity;
+    }
+
+    public ItemStack getItemStack() {
+        return itemStack;
+    }
+
+    public boolean isPoisonous() {
+        return false;
+    }
+
+    public boolean hurtsToEat() {
+        return false;
     }
 
 }
