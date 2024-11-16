@@ -14,4 +14,9 @@ public class ElectricEel extends Fish {
         return true;
     }
 
+    @Override
+    public boolean hurtsToEat() {
+        return true;
+    }
+
 }

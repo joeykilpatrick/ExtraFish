@@ -19,6 +19,4 @@ public class Urchin extends Fish {
         return true;
     }
 
-
-
 }
