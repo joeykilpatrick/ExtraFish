@@ -39,6 +39,48 @@
                 "custom_model_data": 1006
             },
             "model": "extrafish:item/oyster"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 1007
+            },
+            "model": "extrafish:item/flounder"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 1008
+            },
+            "model": "extrafish:item/koi"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 1009
+            },
+            "model": "extrafish:item/squid"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 1010
+            },
+            "model": "extrafish:item/glowing_squid"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 1011
+            },
+            "model": "extrafish:item/octopus"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 1012
+            },
+            "model": "extrafish:item/lobster"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 1013
+            },
+            "model": "extrafish:item/shark"
         }
     ]
 }
