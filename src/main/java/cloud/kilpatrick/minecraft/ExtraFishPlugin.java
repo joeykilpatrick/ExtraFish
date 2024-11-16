@@ -60,7 +60,8 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        event.getPlayer().setResourcePack("https://download.mc-packs.net/pack/592f495b5f75feb3c2b7c8e1d4f52ff52a6da521.zip");
+        String version = getDescription().getVersion();
+        event.getPlayer().setResourcePack("https://github.com/joeykilpatrick/ExtraFish/releases/download/v" + version + "/ExtraFish-" + version + "-resource-pack.zip");
     }
 
     @EventHandler
