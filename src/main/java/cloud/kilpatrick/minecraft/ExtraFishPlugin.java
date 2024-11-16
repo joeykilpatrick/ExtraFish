@@ -1,7 +1,6 @@
 package cloud.kilpatrick.minecraft;
 
 import cloud.kilpatrick.minecraft.fish.Fish;
-import cloud.kilpatrick.minecraft.fish.Urchin;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Item;
@@ -10,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -56,6 +56,11 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
         // Add back "exact" Salmon->CookedSalmon recipe
         Recipe cookedSalmonRecipe = new FurnaceRecipe(new NamespacedKey(this, "cooked-salmon"), new ItemStack(Material.COOKED_SALMON),  new RecipeChoice.ExactChoice(new ItemStack(Material.SALMON)), 0.35f, 200);
         getServer().addRecipe(cookedSalmonRecipe);
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        event.getPlayer().setResourcePack("https://download.mc-packs.net/pack/592f495b5f75feb3c2b7c8e1d4f52ff52a6da521.zip");
     }
 
     @EventHandler

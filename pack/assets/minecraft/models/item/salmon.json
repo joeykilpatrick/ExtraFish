@@ -8,37 +8,37 @@
             "predicate": {
                 "custom_model_data": 1001
             },
-            "model": "custom:item/sturgeon"
+            "model": "extrafish:item/sturgeon"
         },
         {
             "predicate": {
                 "custom_model_data": 1002
             },
-            "model": "custom:item/urchin"
+            "model": "extrafish:item/urchin"
         },
         {
             "predicate": {
                 "custom_model_data": 1003
             },
-            "model": "custom:item/walleye"
+            "model": "extrafish:item/walleye"
         },
         {
             "predicate": {
                 "custom_model_data": 1004
             },
-            "model": "custom:item/shrimp"
+            "model": "extrafish:item/shrimp"
         },
         {
             "predicate": {
                 "custom_model_data": 1005
             },
-            "model": "custom:item/electric_eel"
+            "model": "extrafish:item/electric_eel"
         },
         {
             "predicate": {
                 "custom_model_data": 1006
             },
-            "model": "custom:item/oyster"
+            "model": "extrafish:item/oyster"
         }
     ]
 }
