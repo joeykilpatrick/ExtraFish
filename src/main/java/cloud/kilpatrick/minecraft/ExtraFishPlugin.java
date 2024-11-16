@@ -71,18 +71,26 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
             double totalRarity = this.fish.stream().map(Fish::getRarity).reduce(0.0, Double::sum);
             double roll = random.nextDouble() * totalRarity;
 
-            Item caught = (Item) event.getCaught();
-            assert caught != null;
+            Fish caughtFish = null;
 
             for (Fish fish : this.fish) {
                 double rarity = fish.getRarity();
                 if (roll < rarity) {
+                    caughtFish = fish;
                     // Replace the caught item with the plugin fish
+                    Item caught = (Item) event.getCaught();
+                    assert caught != null;
                     caught.setItemStack(fish.getItemStack());
-                    return;
+                    break;
                 } else {
                     roll -= rarity;
                 }
+            }
+
+            assert caughtFish != null;
+
+            if (caughtFish.hurtsToCatch()) {
+                event.getPlayer().damage(2.0);
             }
         }
     }

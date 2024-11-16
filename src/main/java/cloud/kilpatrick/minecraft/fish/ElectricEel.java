@@ -9,4 +9,9 @@ public class ElectricEel extends Fish {
         super(customModelData, rarity);
     }
 
+    @Override
+    public boolean hurtsToCatch() {
+        return true;
+    }
+
 }
