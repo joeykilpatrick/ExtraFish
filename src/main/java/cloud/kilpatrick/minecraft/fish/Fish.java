@@ -3,7 +3,6 @@ package cloud.kilpatrick.minecraft.fish;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.components.FoodComponent;
 
 public abstract class Fish {
 
@@ -27,6 +26,10 @@ public abstract class Fish {
 
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    public boolean hurtsToCatch() {
+        return false;
     }
 
     public boolean isPoisonous() {

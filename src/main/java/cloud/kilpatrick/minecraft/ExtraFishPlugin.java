@@ -27,8 +27,6 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getLogger().info("onEnable is called!");
-
         getServer().getPluginManager().registerEvents(this, this);
 
         Reflections reflections = new Reflections("cloud.kilpatrick.minecraft.fish");
@@ -58,29 +56,32 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
         getServer().addRecipe(cookedSalmonRecipe);
     }
 
-    @Override
-    public void onDisable() {
-        getLogger().info("onDisable is called!");
-    }
-
     @EventHandler
     public void onPlayerFish(PlayerFishEvent event) {
         // Check if the fish was caught (event state FISHING is only cast)
         if (event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
+
             Random random = new Random();
+
+            // Leave a 30% chance to leave caught fish unchanged
+            if (random.nextDouble() < 0.30) {
+                return;
+            }
+
+            double totalRarity = this.fish.stream().map(Fish::getRarity).reduce(0.0, Double::sum);
+            double roll = random.nextDouble() * totalRarity;
+
+            Item caught = (Item) event.getCaught();
+            assert caught != null;
 
             for (Fish fish : this.fish) {
                 double rarity = fish.getRarity();
-                double roll = random.nextDouble();
-                getLogger().info("Rolled a " + roll);
                 if (roll < rarity) {
-                    ItemStack pluginFish = fish.getItemStack();
-
                     // Replace the caught item with the plugin fish
-                    Item caught = (Item) event.getCaught();
-                    if (caught != null) {
-                        caught.setItemStack(pluginFish);
-                    }
+                    caught.setItemStack(fish.getItemStack());
+                    return;
+                } else {
+                    roll -= rarity;
                 }
             }
         }
