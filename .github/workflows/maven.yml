@@ -1,11 +1,6 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: New Release
 
 on:
@@ -31,8 +26,16 @@ jobs:
         java-version: '21'
         distribution: 'corretto'
         cache: maven
+
+    - name: Set environment variables
+      run: |
+        echo "ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
+        echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
+    - name: Prebuild
+      run: kotlinc -script ./prebuild.kts
         
-    - name: Build with Maven
+    - name: Build
       run: mvn -B package --file pom.xml
       
     - name: Cache Maven packages
@@ -41,17 +44,6 @@ jobs:
        path: ~/.m2
        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
        restore-keys: ${{ runner.os }}-m2
-       
-    - name: Set environment variables
-      run: |
-        echo "ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
-        echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-       
-    - name: Package resource pack
-      run: |
-        cd ./pack
-        zip -r ../$ARTIFACT_ID-$VERSION-resource-pack.zip *
-        cd ..
 
     - name: Release
       uses: softprops/action-gh-release@v2
@@ -59,4 +51,4 @@ jobs:
       with:
         files: |
           target/${{ env.ARTIFACT_ID }}-${{ env.VERSION }}.jar
-          ${{ env.ARTIFACT_ID }}-${{ env.VERSION }}-resource-pack.zip
+          target/${{ env.ARTIFACT_ID }}-${{ env.VERSION }}-resource-pack.zip
