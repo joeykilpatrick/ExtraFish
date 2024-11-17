@@ -44,11 +44,19 @@ jobs:
        
     - name: Set environment variables
       run: |
-        ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
-        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo "ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
+        echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+       
+    - name: Package resource pack
+      run: |
+        cd ./pack
+        zip -r ../$ARTIFACT_ID-$VERSION-resource-pack.zip pack/*
+        cd ..
 
-    - uses: actions/upload-artifact@v4
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        name: $ARTIFACT_ID-$VERSION.jar
-        path: target/$ARTIFACT_ID-$VERSION.jar
-        
+        files: |
+          target/$ARTIFACT_ID-$VERSION.jar
+          $ARTIFACT_ID-$VERSION-resource-pack.zip
