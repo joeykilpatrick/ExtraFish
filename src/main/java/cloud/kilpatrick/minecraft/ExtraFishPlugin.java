@@ -3,6 +3,7 @@ package cloud.kilpatrick.minecraft;
 import cloud.kilpatrick.minecraft.fish.Fish;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,9 +17,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.reflections.Reflections;
 
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.reflections.scanners.Scanners.SubTypes;
@@ -26,6 +25,7 @@ import static org.reflections.scanners.Scanners.SubTypes;
 public class ExtraFishPlugin extends JavaPlugin implements Listener {
 
     private Set<Fish> fish;
+    private Map<Biome, Fish> biomeFishMap = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -102,7 +102,10 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
                 }
             }
 
-            assert caughtFish != null;
+            // Could be null in rare cases due to floating point arithmetic
+            if (caughtFish == null) {
+                return;
+            }
 
             if (caughtFish.hurtsToCatch()) {
                 event.getPlayer().damage(2.0);
