@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: New Release
 
 on:
   push:
@@ -58,5 +58,5 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          target/${ARTIFACT_ID}-${VERSION}.jar
-          ${ARTIFACT_ID}-${VERSION}-resource-pack.zip
+          target/${{ env.ARTIFACT_ID }}-${{ env.VERSION }}.jar
+          ${{ env.ARTIFACT_ID }}-${{ env.VERSION }}-resource-pack.zip
