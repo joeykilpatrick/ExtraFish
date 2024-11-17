@@ -56,6 +56,13 @@ public class ExtraFishPlugin extends JavaPlugin implements Listener {
         // Add back "exact" Salmon->CookedSalmon recipe
         Recipe cookedSalmonRecipe = new FurnaceRecipe(new NamespacedKey(this, "cooked-salmon"), new ItemStack(Material.COOKED_SALMON),  new RecipeChoice.ExactChoice(new ItemStack(Material.SALMON)), 0.35f, 200);
         getServer().addRecipe(cookedSalmonRecipe);
+
+        // Add custom fish recipes
+        for (Fish fish : this.fish) {
+            for (Recipe recipe : fish.getRecipes(this)) {
+                getServer().addRecipe(recipe);
+            }
+        }
     }
 
     @EventHandler

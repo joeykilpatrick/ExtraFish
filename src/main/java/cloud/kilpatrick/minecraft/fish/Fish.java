@@ -2,7 +2,12 @@ package cloud.kilpatrick.minecraft.fish;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Fish {
 
@@ -26,6 +31,10 @@ public abstract class Fish {
 
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    public Set<Recipe> getRecipes(Plugin plugin) {
+        return new HashSet<>();
     }
 
     public boolean hurtsToCatch() {
