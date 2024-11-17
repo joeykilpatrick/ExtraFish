@@ -50,7 +50,7 @@ jobs:
     - name: Package resource pack
       run: |
         cd ./pack
-        zip -r ../$ARTIFACT_ID-$VERSION-resource-pack.zip pack/*
+        zip -r ../$ARTIFACT_ID-$VERSION-resource-pack.zip *
         cd ..
 
     - name: Release
