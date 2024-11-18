@@ -1,5 +1,5 @@
 target/
-src/resources/plugin.yml
+src/main/resources/plugin.yml
 dependency-reduced-pom.xml
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

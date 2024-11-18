@@ -19,7 +19,7 @@ pluginYml.delete()
 val config = """
 name: $artifactName
 version: $version
-main: cloud.kilpatrick.minecraft.ExtraFishPlugin
+main: cloud.kilpatrick.minecraft.extrafish.ExtraFishPlugin
 api-version: 1.16
 """
 
